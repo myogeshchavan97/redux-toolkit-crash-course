@@ -1,18 +1,21 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import {
-  getUsersRequest,
-  getUsersSuccess,
-  getUsersError
-} from './actions/usersActions';
-import User from './components/User';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import User from './components/Users';
+import {
+  getUsersError,
+  getUsersRequest,
+  getUsersSuccess
+} from './redux/features/usersSlice';
 
 function App() {
-  const { isLoading, isError, data: users } = useSelector((state) => state);
+  const {
+    isLoading,
+    isError,
+    data: users
+  } = useSelector((state) => state.users);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -44,12 +47,3 @@ function App() {
 }
 
 export default App;
-// const mapStateToProps = (state) => {
-//   return {
-//     isLoading: state.isLoading,
-//     isError: state.isError,
-//     users: state.data
-//   };
-// };
-
-// export default connect(mapStateToProps)(App);
