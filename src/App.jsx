@@ -16,6 +16,7 @@ function App() {
     data: users
   } = useSelector((state) => state.users);
   const dispatch = useDispatch();
+
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -37,6 +38,7 @@ function App() {
   if (isError) {
     return <p className='error'>Something went wrong. Try again later.</p>;
   }
+
   return (
     <div className='users-list'>
       {users.map((user) => (
