@@ -1,11 +1,6 @@
-import axios from 'axios';
 import { useEffect } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import {
-  getUsersRequest,
-  getUsersSuccess,
-  getUsersError
-} from './actions/usersActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers } from './actions/usersActions';
 import User from './components/User';
 import './App.css';
 
@@ -14,18 +9,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getUsers = async () => {
-      try {
-        dispatch(getUsersRequest());
-        const { data } = await axios.get(
-          'https://randomuser.me/api/?results=10&nat=us'
-        );
-        dispatch(getUsersSuccess(data.results));
-      } catch (error) {
-        dispatch(getUsersError());
-      }
-    };
-    getUsers();
+    dispatch(getUsers());
   }, []);
 
   if (isLoading) {
